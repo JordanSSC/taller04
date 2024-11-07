@@ -1,18 +1,17 @@
-public class Main{
+public class Main {
     public static void main(String[] args) {
-        ReportCreator reportCreator = ReportCreator.getInstance();
-        // ACÁ VAN METODOS, TRABAJEN ESTO XD
-        
-        ReportFactory pdfFactory = new PDFReportFactory();
-        Report pdfReport = pdfFactory.createReport();
-        pdfReport.generateContent();
+        // getting reportCreator unique instance
+        ReportCreator reportManager = ReportCreator.getInstance();
 
-        ReportFactory excelFactory = new ExcelReportFactory();
-        Report excelReport = excelFactory.createReport();
-        excelReport.generateContent();
+        // generating different reports
+        reportManager.generateReport("pdf");
+        reportManager.generateReport("excel");
+        reportManager.generateReport("word");
 
-        ReportFactory wordFactory = new WordReportFactory();
-        Report wordReport = wordFactory.createReport();
-        wordReport.generateContent();
+        // sending notifications using different adapters
+        NotificationAdapter emailNotification = new EmailNotificationAdapter();
+        NotificationAdapter whatsappNotification = new WhatsAppNotificationAdapter();
+        NotificationAdapter telegramNotification = new TelegramNotificationAdapter();
+
     }
 }
